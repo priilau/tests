@@ -17,6 +17,24 @@ const ITEMS = [
   }
 ];
 
+const RenderItems = () => {
+  return (
+    ITEMS.map(item => {
+      return (
+        <span key={item.name}>{item.name}: {item.price}<br/></span>
+      );
+    })
+  );
+};
+
+const GetSum = () => {
+  let sum = 0;
+  ITEMS.forEach(item => {
+    sum += item.price;
+  });
+  return sum;
+};
+
 const Test1 = () => {
   return (
     <div>
@@ -31,9 +49,9 @@ const Test1 = () => {
         <img style={{width: 200}} src={test1Example}/>
       </div>
       <div>
-        [replace me]
+        <RenderItems />
       </div>
-      <div><span className={"bold"}>Summa kokku:</span> [replace me]</div>
+      <div><span className={"bold"}>Summa kokku:</span> <GetSum /></div>
     </div>
   );
 };
