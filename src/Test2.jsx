@@ -1,25 +1,40 @@
 import React from "react";
 import {TiHeartFullOutline} from "react-icons/ti";
 
-const Test2 = () => {
-  return (
-    <div>
-      <div className={"description"}>
-        Ülesanne 2:
-        <p>
-          Rakendus peab arvet pidama mitu korda on südame ikooni klikitud ning vastava numbri <code>likes:</code> järel kuvama.
-        </p>
-      </div>
+class Test2 extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      likes: 0
+    };
+  }
 
-      <div style={{display:"flex", alignItems: "center"}}>
-        <div>
-          Likes: [replace me]
+  handleClick = () => {
+    this.setState({
+      likes: this.state.likes + 1
+    }); 
+  }
+  
+  render () {  
+    return (
+      <div>
+        <div className={"description"}>
+          Ülesanne 2:
+          <p>
+            Rakendus peab arvet pidama mitu korda on südame ikooni klikitud ning vastava numbri <code>likes:</code> järel kuvama.
+          </p>
         </div>
-        <TiHeartFullOutline />
-        <div>Click me</div>
+
+        <div style={{display:"flex", alignItems: "center"}}>
+          <div>
+            Likes: {this.state.likes}
+          </div>
+          <TiHeartFullOutline onClick={this.handleClick}/>
+          <div> -- Click me</div>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default Test2;
