@@ -4,8 +4,9 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 
 module.exports = {
-  mode: "none",
+  mode: "development",
   entry: './src/index.jsx',
+  devtool: 'source-map',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
@@ -31,6 +32,7 @@ module.exports = {
         loader: "eslint-loader",
         options: {
           failOnError: true,
+          fix: true,
         },
       },
       {
