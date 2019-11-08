@@ -1,7 +1,7 @@
-const express = require('express');
+const express = require("express");
 const path = require("path");
-const swaggerUi = require('swagger-ui-express');
-const YAML = require('yamljs');
+const swaggerUi = require("swagger-ui-express");
+const YAML = require("yamljs");
 const swaggerDocument = YAML.load(path.resolve(__dirname, "default.yaml"));
 const app = express();
 require("./database.js");
@@ -10,9 +10,9 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 const productsRouter = require("./product.router.js");
 
-app.get('/', (req, res) => res.send('Hello World!'));
+app.get("/", (req, res) => res.send("Hello World!"));
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use("/api/v1/products", productsRouter);
 
