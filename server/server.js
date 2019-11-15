@@ -9,12 +9,16 @@ const PORT = 3000;
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 const productsRouter = require("./product.router.js");
+const ordersRouter = require("./orders.router.js");
 
 app.get("/", (req, res) => res.send("Hello World!"));
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use("/api/v1/products", productsRouter);
+app.use("/api/v1/orders", ordersRouter);
+app.use("/static", express.static("dist/static"));
+
 
 app.post("/api/v1/register", (req,res)=>{
   const age = req.body.age;
@@ -30,3 +34,4 @@ app.post("/api/v1/register", (req,res)=>{
 });
 
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
+
