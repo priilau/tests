@@ -11,7 +11,7 @@ router.get("/", async (req, res)=>{
 router.get("/random", async (req, res)=>{
   const xs = await Product.find({});
   const r = getRandomInt(0, xs.length - 1);
-  res.status(200).send(xs[r])
+  res.status(200).send(xs[r]);
 });
 
 router.get("/similar/:productId", async (req, res)=>{

@@ -46,9 +46,6 @@ const Layout = ({children}) => {
       <BelowHeader>
         {children}
       </BelowHeader>
-      <div className="footer">
-        "As long as you're going to be thinking anyway, think big."
-      </div>
     </div>
   );
 };
