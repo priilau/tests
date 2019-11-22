@@ -2,6 +2,39 @@ import React from "react";
 // import {toast} from "react-toastify";
 
 class Test6 extends React.PureComponent {
+  state = {
+    fullName: "",
+    burger: "",
+    drink: "",
+    orders: []
+  };
+
+  fetchOrders = () => {
+    fetch(`/api/v1/orders/search/?fullName=${this.state.fullName}&burger=${this.state.burger}&drink=${this.state.drink}`)
+        .then(res => {
+            return res.json();
+        })
+        .then(item => {
+            this.setState({
+                ...item,
+            });
+        })
+        .catch(err => {
+          console.log("error: ", err);
+        });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.fetchOrders();
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  }
+
   render() {
     return (
       <>
@@ -26,15 +59,15 @@ class Test6 extends React.PureComponent {
 
         </div>
         <div className="ds">
-          <form className="ds-item style-2">
+          <form className="ds-item style-2" onSubmit={this.handleSubmit.bind(this)}>
             <h3 className="style-2">Andmebaasi päring</h3>
             <div className={"row"}>
               <label htmlFor="fullName">Kliendi nimi</label>
-              <input name="fullName" type="text" />
+              <input name="fullName" type="text" onChange={this.handleChange} value={this.state["fullName"]}/>
             </div>
             <div className={"row"}>
               <label htmlFor="burger">Burger</label>
-              <select name="burger">
+              <select name="burger" onChange={this.handleChange} value={this.state["burger"]}>
                 <option value="">-</option>
                 <option value="megaBurger">Megaburger</option>
                 <option value="baconBurger">Peekoniburger</option>
@@ -43,7 +76,7 @@ class Test6 extends React.PureComponent {
             </div>
             <div className={"row"}>
               <label htmlFor="drink">Jook</label>
-              <select name="drink">
+              <select name="drink" onChange={this.handleChange} value={this.state["drink"]}>
                 <option value="">-</option>
                 <option value="coke">Coca-Cola</option>
                 <option value="sprite">Sprite</option>
@@ -54,7 +87,13 @@ class Test6 extends React.PureComponent {
               Otsi
             </button>
           </form>
-
+        {
+          this.state.orders.map((order, index) => 
+            <div key={index}>
+              {order}
+            </div>
+          )
+        }
 
         </div>
       </>

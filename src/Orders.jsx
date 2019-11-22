@@ -11,7 +11,7 @@ const fetchOrders = (setOrders) => {
   })
   .then(list => {
     setOrders(list);
-    // toast.success("Tellimuste uuendamine õnnestus :)");
+    toast.success("Tellimuste uuendamine õnnestus :)");
   })
   .catch(() => {
     alert("error happened");

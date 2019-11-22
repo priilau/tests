@@ -13,7 +13,6 @@ router.post("/", (req, res) => {
       fullName: req.body.fullName,
       burger: req.body.burger,
       drink: req.body.drink,
-      created: req.body.created
   };
   const item1 = new Order(props);
   item1.save(err => {
@@ -37,6 +36,32 @@ router.get("/", (req, res) => {
       res.send(items);
   });
 });
+
+router.get("/search", (req, res) => {
+  Order.find(createSearchQuery(req.query), function(err, items) {
+      if(err) {
+          console.log("Error: ", err);
+          res.status(500).send(err);
+          return;
+      }
+      console.log(items);
+      res.send(items);
+  });
+});
+
+function createSearchQuery({fullName, burger, drink}) {
+  const query = {};
+  if(fullName.trim().length > 0) {
+    query.fullName = fullName;
+  }
+  if(burger.trim().length > 0) {
+    query.burger = burger;
+  }
+  if(drink.trim().length > 0) {
+    query.drink = drink;
+  }
+  return query;
+}
 
 module.exports = router;
 
