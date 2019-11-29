@@ -1,7 +1,7 @@
 import React from "react";
-import example1 from "./images/1.png";
-import example2 from "./images/2.png";
-import example3 from "./images/3.png";
+import example1 from "../images/1.png";
+import example2 from "../images/2.png";
+import example3 from "../images/3.png";
 
 class Test3 extends React.PureComponent{
     state = {
