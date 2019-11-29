@@ -4,7 +4,30 @@ import OnlineCount from "../OnlineCount";
 class Test11 extends React.PureComponent {
   state = {
     onlineCount: 20,
-  };
+  }
+
+  componentDidMount() {
+    this.myInterval = setInterval(this.fetchCount, 3000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.myInterval);
+  }
+
+  fetchCount = () => {
+    fetch(`/api/v1/users/onlineCount`)
+    .then(res => {
+      return res.json();
+    })
+    .then(count => { 
+      this.setState({
+          onlineCount: count,
+      });
+    })
+    .catch(err => {
+        console.log("error: ", err);
+    });
+};
 
   render() {
     return (
